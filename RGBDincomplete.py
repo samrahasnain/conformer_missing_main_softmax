@@ -736,9 +736,9 @@ class RGBD_SOD(nn.Module):
         self.upf2 = nn.ConvTranspose2d(576,384,kernel_size=3, stride=2, padding=1, output_padding=1, dilation=1)
         self.upf3 = nn.Conv2d(576,768,1,1)
         self.last_conv = nn.Conv2d(64,1, 1, 1)
-        self.f_up3 = nn.ConvTranspose2d(768,384,kernel_size=3, stride=2, padding=1, output_padding=1, dilation=1)
-        self.f_up2 = nn.ConvTranspose2d(384,384,kernel_size=3, stride=2, padding=1, output_padding=1, dilation=1)
-        self.f_up1 = nn.ConvTranspose2d(384,64,kernel_size=3, stride=2, padding=1, output_padding=1, dilation=1)       
+        self.f_up3 = nn.ConvTranspose2d(1536,768,kernel_size=3, stride=2, padding=1, output_padding=1, dilation=1)
+        self.f_up2 = nn.ConvTranspose2d(768,768,kernel_size=3, stride=2, padding=1, output_padding=1, dilation=1)
+        self.f_up1 = nn.ConvTranspose2d(768,64,kernel_size=3, stride=2, padding=1, output_padding=1, dilation=1)       
 
     def forward(self, rgb,depth):
         feat_rgb,feat_depth_r  = self.RGBDInModule(rgb,depth)
