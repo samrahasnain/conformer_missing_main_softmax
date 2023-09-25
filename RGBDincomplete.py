@@ -728,8 +728,8 @@ class RGBD_SOD(nn.Module):
         self.msr2 = MSR(in_features=768, h_features=128,  out_features=2)
         self.msr3 = MSR(in_features=576, h_features=128, out_features=2)
         self.softmax = nn.Softmax(dim=1)
-        self.ca1 = ShuffleChannelAttention(channel=384,reduction=16,kernel_size=3,groups=4)
-        self.ca2 = ShuffleChannelAttention(channel=768,reduction=16,kernel_size=3,groups=8)
+        self.ca1 = ShuffleChannelAttention(channel=768,reduction=16,kernel_size=3,groups=4)
+        self.ca2 = ShuffleChannelAttention(channel=1536,reduction=32,kernel_size=3,groups=8)
         
         self.sa = SpatialGroupEnhance(groups=4)
         self.upf1 = nn.ConvTranspose2d(576,384,kernel_size=3, stride=4, padding=0, output_padding=1, dilation=1)
@@ -788,9 +788,9 @@ class RGBD_SOD(nn.Module):
         #up_fusion2=self.up(fusion2 )
         fusion1 = torch.cat((self.upf1(corr_rgb2d1),corr_d2rgb1),dim=1)
 
-        print(fusion1.shape)
+        '''print(fusion1.shape)
         print(fusion2.shape)
-        print(fusion3.shape)
+        print(fusion3.shape)'''
        
 
         fusion_ca3 = self.ca2(fusion3)
