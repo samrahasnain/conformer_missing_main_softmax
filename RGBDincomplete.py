@@ -788,9 +788,9 @@ class RGBD_SOD(nn.Module):
         #up_fusion2=self.up(fusion2 )
         fusion1 = torch.cat((self.upf1(corr_rgb2d1),corr_d2rgb1),dim=1)
 
-        '''print(fusion1.shape)
+        print(fusion1.shape)
         print(fusion2.shape)
-        print(fusion3.shape)'''
+        print(fusion3.shape)
        
 
         fusion_ca3 = self.ca2(fusion3)
